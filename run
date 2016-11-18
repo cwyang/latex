@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+    echo "Usage: run [filename]"
+    exit 1
+fi
+pdflatex $1
+bibtex $1
+pdflatex $1
+pdflatex $1
