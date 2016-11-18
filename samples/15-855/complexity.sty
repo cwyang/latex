@@ -1,0 +1,141 @@
+%---------------------------------------------------------------------
+% Homework solutions style file for 15-855: Computational Complexity.
+%
+% The LaTeX file for a homework in this class should look like the 
+% following:
+%
+%  \documentclass[11pt]{article}
+%  \usepackage{complexity}
+%
+%  \Homework{HOMEWORK NUMBER}
+%  \Name{YOUR NAME}
+%  \Collaborators{Detail how you collaborated with other students for this homework.}
+%
+%  \begin{document}
+%  \MakeHeader
+%
+%  \section{Problem 1}
+%  Solution to the first problem...
+%
+%  \section{Problem 2}
+%  Solution to the second problem...
+%
+%  \bibliography{mybib} % change mybib to the name of your bib file.
+%
+%  \end{document} 
+%---------------------------------------------------------------------
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts,latexsym,url,xspace}
+
+%---------------------------------------------------------------------
+% Some useful commands.
+%
+% See below for some commands that may be useful in your solutions.
+% You are of course encouraged to create any other commands that 
+% you find useful. (You can do so at the top of your LaTeX file.)
+%---------------------------------------------------------------------
+
+% Theorems
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+% A few complexity classes
+\renewcommand{\P}{\ensuremath{\mathsf{P}}\xspace}
+\newcommand{\NP}{\ensuremath{\mathsf{NP}}\xspace}
+\newcommand{\coNP}{\ensuremath{\mathsf{coNP}}\xspace}
+\renewcommand{\L}{\ensuremath{\mathsf{L}}\xspace}
+\newcommand{\NL}{\ensuremath{\mathsf{NL}}\xspace}
+\newcommand{\PSPACE}{\ensuremath{\mathsf{PSPACE}}\xspace}
+\newcommand{\NC}{\ensuremath{\mathsf{NC}}\xspace}
+\newcommand{\Ppoly}{\ensuremath{\mathsf{P/poly}}\xspace}
+\newcommand{\BPP}{\ensuremath{\mathsf{BPP}}\xspace}
+\newcommand{\EXP}{\ensuremath{\mathsf{EXP}}\xspace}
+\newcommand{\IP}{\ensuremath{\mathsf{IP}}\xspace}
+
+% Probability statements 
+\renewcommand{\Pr}{{\bf Pr}} 
+\newcommand{\E}{{\bf E}}
+\newcommand{\Prx}{\mathop{\bf Pr\/}}         % these versions with 'x' at the end
+\newcommand{\Ex}{\mathop{\bf E\/}}           % cause the thing you're taking the Pr or E over
+\newcommand{\Varx}{\mathop{\bf Var\/}}       % to appear *underneath* the Pr or E in displayed 
+\newcommand{\Covx}{\mathop{\bf Cov\/}}       % equations rather than halfway underneath and to the side
+
+% poly and polylog
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\polylog}{\mathrm{polylog}}
+
+% Shortcuts useful for writing functions (i.e. f : \bitsn \to \R)
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\bitsn}{\bits^n}
+
+% Shortcuts for common greek letters
+\newcommand{\eps}{\epsilon}
+\newcommand{\lam}{\lambda}
+
+% Shortcuts for common variables
+\newcommand{\barx}{\overline{x}}
+\newcommand{\bary}{\overline{y}}
+\newcommand{\barz}{\overline{z}}
+
+\newcommand{\calA}{{\cal A}}
+\newcommand{\calB}{{\cal B}}
+\newcommand{\calC}{{\cal C}}    % etc.
+
+\newcommand{\bx}{{\boldsymbol{x}}}  
+\newcommand{\by}{{\boldsymbol{y}}}  % etc.
+
+% Smaller operators and fractions
+\newcommand{\littlesum}{{\textstyle \sum}}              % use this if you think the summation sign
+\newcommand{\littlesumx}{\mathop{{\textstyle \sum}}}    % you're getting is too large
+\newcommand{\half}{{\textstyle \frac12}}     % use if you think the \frac12 you're getting is too large
+
+
+
+
+%---------------------------------------------------------------------
+% Formatting of the document.
+%
+% The rest of this file establishes the formatting of the homework 
+% document.  There is no need to change -- or even be familiar -- with
+% any of the following.
+%---------------------------------------------------------------------
+
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{0in}
+
+\def\NameStr{??}
+\def\HomeworkStr{??}
+\def\CollaborationStr{??}
+\newcommand{\Name}[1]{\def\NameStr{#1}}
+\newcommand{\Homework}[1]{\def\HomeworkStr{#1}}
+\newcommand{\Collaboration}[1]{\def\CollaborationStr{#1}}
+
+\newcommand{\MakeHeader}{
+\noindent{{\bf 15-855: Computational Complexity}}
+         {\hfill {\bf \today}} 
+
+\begin{center}
+{\Large \sc Homework \HomeworkStr} \\
+\smallskip
+{\Large\NameStr}\footnote{{\bf Collaboration notice:} \CollaborationStr}\\
+\bigskip
+\begin{tabular}{p{\textwidth}}
+\hline\\
+\end{tabular}
+\end{center}
+
+\vspace{-.2in}
+}
+
+\bibliographystyle{alpha}
+

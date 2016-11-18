@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+\usepackage{complexity}
+
+\Homework{0}
+\Name{Eric Blais}
+\Collaboration{I discussed the outline for this document with Ryan O'Donnell and Venkatesan
+ Guruswami.  Ryan also provided most of the commands defined in the style file.  (In your homeworks,
+ please explain how you collaborated with other students; don't just list the names of people with 
+ whom you collaborated.)}
+
+\begin{document}
+
+\MakeHeader
+
+\section{Problem 1}
+Please remember to write solutions that are clear and concise.  
+
+Two resources that may be particularly helpful for writing homework solutions 
+ are the first chapter of {\it Mathematical 
+Writing}~\cite{KLR96} and {\it The Not So Short Introduction to 
+\LaTeXe}~\cite{OPHS08}.  The former contains a list of simple guidelines for 
+writing mathematics clearly; the latter is a good reference for \LaTeX.  
+
+
+\section{Problem 2}
+In the \texttt{complexity.sty} file, we have defined some commands that you may find useful 
+in your solutions.  It includes commands for quickly writing the names of some complexity 
+classes such as \P, \NP, and \EXP.  It also includes shortcuts for writing mathematical statements, 
+as the following Proposition illustrates.
+
+\begin{proposition}
+For any function $f : \bitsn \to \R$, if there is a set $\calA \subseteq \bitsn$ such that
+$$
+\Ex_{\bx \in \calA}[ f(x) ] \ge \eps,
+$$
+then there exists an element $x \in \calA$ such that $f(x) \ge \eps$.
+\end{proposition}
+
+(See the \LaTeX\ source of this document to view how the shortcut commands are used.)  
+
+\bibliography{sample}
+
+\end{document} 
