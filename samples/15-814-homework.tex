@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage[left=3cm,top=3cm,right=4cm,nohead,bottom=3cm]{geometry}
+\input{15-814-homework-macros.tex}
+
+\title{15-814 Homework hw1}
+\author{YOUR NAME HERE}
+
+\begin{document}
+\maketitle
+
+\section{Arithmetic}
+\begin{task}
+Prove the following \emph{inversion lemma}:
+\begin{quote}
+  (If Inversion) If $\G \entails \etype{\eifb{e_1}{e_2}{e_3}}{\tau}$,
+  then $\G \entails \etype{e_1}{\boolt}$, $\G \entails
+  \etype{e_2}{\tau}$, and $\G \entails \etype{e_3}{\tau}$.
+\end{quote}
+This seems immediate, but really follows from the induction principle
+for the typing judgment. (Tip: Prove that for all $\G$, $e$, $\tau$
+such that $\G \entails \etype{e}{\tau}$, if $e = \eifb{e_1}{e_2}{e_3}$
+for some $e_1$, $e_2$, $e_3$, then $\G \entails \etype{e_1}{\boolt}$,
+$\G \entails \etype{e_2}{\tau}$, and $\G \entails \etype{e_3}{\tau}$.)
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task}
+Prove unicity of typing for this language.
+\begin{quote}
+  \emph{(Unicity of Typing)} For any $\G$, $e$, $\tau$, $\tau'$ such
+  that $\G \entails \etype{e}{\tau}$ and $\G \entails
+  \etype{e}{\tau'}$, we have $\tau = \tau'$. You may assume that any
+  variable appears at most once in a given context.
+\end{quote}
+\end{task}
+\begin{sol}
+\end{sol}
+
+\section{Functions}
+\subsection{Function Blocks} \label{sec:function-blocks}
+\begin{task} \label{task:syntax}
+  Give a definition in abstract syntax for the language constructs
+  described above. Include the arities (with sorts) of the operators,
+  per Section 1.2 of PFPL.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task} \label{task:scope}
+  We want to respect the \emph{identification convention}:
+  \begin{quote}
+    Abstract binding trees are always identified up to $\alpha$-equivalence.
+  \end{quote}
+  With this in mind, which of the two strategies is correct? Explain.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task} \label{task:typing} Starting with the rules in Appendix
+  \ref{app:exp}, complete the definition of the typing judgment $\G
+  \entails \etype{e}{\tau}$, and define the judgement
+  $\G \entails \ptype{p}{\tau}$.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task} \label{task:sos}
+  Give a structural operational semantics for this language by
+  completing the definition of $\D \entails \esteps{e}{e'}$ and
+  defining a judgment $\D \entails \psteps{p}{p'}$. Assume that the
+  value judgment $\D \entails \pval{p}$ is defined by the single rule
+  \[
+  \infer[\rulename{Res-V}]
+    {\D \entails \pval{(\pres{e})}}
+    {\D \entails \eval{e}}
+  \]
+
+  In order to track the environment of function definitions, we will
+  add a new kind of assumption to our evaluation context:
+  \[
+  \begin{array}{lcl}
+    \D & ::= & \cdots \mid \fundef{u}{x}{e}
+  \end{array}
+  \]
+  The assumption $\fundef{u}{x}{e}$ expresses that the function
+  variable $u$ is currently in scope and that it takes an argument $x$
+  and computes the expression $e$.
+
+  Your definition should of the semantics should satisfy the
+  properties of \emph{progress} and \emph{preservation}.
+
+  \begin{quote}
+    \emph{(Progress)} If $\entails \ptype{p}{\tau}$, then either
+    $\entails \pval{p}$ or there exists $p'$ such that
+    $\entails \psteps{p}{p'}$. \\
+    \emph{(Preservation)} If $\entails \ptype{p}{\tau}$ and $\entails
+    \psteps{p}{p'}$, then $\entails \ptype{p'}{\tau}$.
+  \end{quote}
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task}
+  Prove progress for the rules you have specified. You will want to
+  state and prove an analogous theorem for expressions first. For
+  programs, it may be helpful to prove the following more general
+  theorem:
+  \begin{quote}
+    If $\fctx{\D}{\G}$ and $\G \entails \ptype{p}{\tau}$, then either $\D
+    \entails \pval{p}$ or there exists $p'$ such that
+    $\D \entails \psteps{p}{p'}$. \\
+  \end{quote}
+  Here $\fctx{\D}{\G}$ is a judgment on contexts defined by the
+  following rules:
+  \[
+  \infer[\rulename{Env-Nil}]
+    {\fctx{\cdot}{\cdot}}
+    {}
+  \qquad
+  \infer[\rulename{Env-Cons}]
+    {\fctx{(\D, \fundef{f}{x}{e})}{(\G, \ftype{f}{\tau_1}{\tau_2})}}
+    {\fctx{\D}{\G}}
+  \]
+  This judgment expresses that the environment $\D$ and type context
+  $\G$ reference the same function variables, i.e. that they agree on
+  what is in scope. This condition is enough to guarantee a canonical
+  forms lemma, which you will need for your proof:
+  \begin{quote}
+    \emph{(Canonical Forms Lemma)} Let contexts $\fctx{\D}{\G}$ and an
+    expression $e$ be given. Assume that $\D \entails \eval{e}$. If
+    $\G \entails \etype{e}{\numt}$, then $e = \num{n}$ for some $n \in
+    \mathbb{Z}$. If $\G \entails \etype{e}{\boolt}$, then either $e =
+    \etrue$ or $e = \efalse$.
+  \end{quote}
+  This lemma enumerates the forms that well-typed values can take (the
+  eponymous \emph{canonical forms}). You are not required to prove
+  this lemma.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task} \label{task:recursive}
+  How does this extension change your answers to Tasks
+  \ref{task:syntax}, \ref{task:typing}, and \ref{task:sos}? Give the
+  syntax and rules where different. (You should also make a change to
+  the form of the assumption $\fundef{u}{x}{e}$.)
+\end{task}
+\begin{sol}
+\end{sol}
+
+\subsection{Functions as Expressions}
+\begin{task} \label{task:fix}
+  Which property (progress or preservation) fails? Why? Describe two
+  solutions to the problem, one by changing the rules for the
+  judgments $\D \vdash \pval{p}$ and $\D \vdash \psteps{p}{p'}$ and
+  one by changing the rules for the judgment $\D \vdash \ptype{p}{\tau}$.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task} \label{task:lambda} Return to the core expression
+  language. We add a new, distinct function type which contains
+  recursive function expressions.
+  \[
+    \tau ::= \cdots \mid \tau \to \tau
+  \]
+  Define abstract syntax for operators for constructing and applying
+  recursive function terms. (In other words, define a version of
+  $\lambda$-abstraction and application which allows for
+  self-reference.) Give statics and dynamics rules for these
+  operators, assuming that we have only the expression language and no
+  outer layer of function definitions.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\section{Structs}
+\begin{task}
+  Give a type declaration in this language which corresponds to the C type \verb|tree| defined above. This definition should match the C struct's behavior exactly.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\begin{task}
+  The C struct definition of \verb|tree| assumes that the programmer
+  follows the conventions described above, and it is possible to
+  construct a \verb|tree| which is well-typed but corresponds to no
+  legal tree. Give an alternate definition of \verb|tree| in our
+  language which statically enforces the conventions.
+\end{task}
+\begin{sol}
+\end{sol}
+
+\section{Base Expression Language} \label{app:exp}
+\subsection{Statics}
+\subsection{Dynamics}
+\end{document}
